@@ -1,10 +1,10 @@
 ﻿using System.Drawing;
 using TagsCloudVisualization.Helpers;
-using TagsCloudVisualization.Models;
+using TagsCloudVisualization.Interfaces;
 
 namespace TagsCloudVisualization;
 
-public class CircularCloudLayouter(Point center)
+public class CircularCloudLayouter(Point center) : ICircularCloudLayouter
 {
     private SpiralParameters spiralParameters = null!;
 
@@ -38,7 +38,7 @@ public class CircularCloudLayouter(Point center)
         return newRectangle;
     }
 
-    private Point GetNextSpiralPoint(Size rectangleSize)
+    public Point GetNextSpiralPoint(Size rectangleSize)
     {
         spiralParameters.SpiralStep = Math.Max(rectangleSize.Width, rectangleSize.Height) / 4 + SpiralParameters.Padding;
 
@@ -50,7 +50,7 @@ public class CircularCloudLayouter(Point center)
         return new Point((int)x + center.X, (int)y + center.Y);
     }
 
-    private void InitialiseParametersWithFirstRectangle(Rectangle firstRectangle)
+    public void InitialiseParametersWithFirstRectangle(Rectangle firstRectangle)
     {
         spiralParameters = new SpiralParameters
         {
@@ -60,7 +60,7 @@ public class CircularCloudLayouter(Point center)
         };
     }
 
-    private Rectangle GetRectangleFromCenterPointAndSize(Point centerPoint, Size rectangleSize)
+    public Rectangle GetRectangleFromCenterPointAndSize(Point centerPoint, Size rectangleSize)
     {
         return new Rectangle(
             new Point(centerPoint.X - rectangleSize.Width / 2, centerPoint.Y + rectangleSize.Height / 2),

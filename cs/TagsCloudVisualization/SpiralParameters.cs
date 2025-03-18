@@ -1,4 +1,4 @@
-﻿namespace TagsCloudVisualization.Models;
+﻿namespace TagsCloudVisualization;
 
 public class SpiralParameters
 {
